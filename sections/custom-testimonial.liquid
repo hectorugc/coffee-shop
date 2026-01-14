@@ -1,56 +1,167 @@
-
 {{- 'custom-testimonial.css' | asset_url | stylesheet_tag -}}
 {{- 'flickity.css' | asset_url | stylesheet_tag -}}
-{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}>
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
 <script src="{{ 'custom-testimonials-slider.js' | asset_url }}" type="module" defer="defer"></script>
 
+{%- style -%}
+  /* Scoping styles to this specific section instance */
+  #shopify-section-{{ section.id }} {
+    --heading-size-desktop: {{ section.settings.heading_font_size }}px;
+    --heading-size-mobile: {{ section.settings.heading_font_size | times: 0.75 | round }}px;
+    --heading-align: {{ section.settings.heading_alignment }};
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
 
+  .testimonial-section-wrapper {
+    padding-top: var(--section-padding-top);
+    padding-bottom: var(--section-padding-bottom);
+    overflow: hidden;
+  }
 
+  .testimonial-title {
+    margin: 0 0 30px 0;
+    line-height: 1.2;
+    text-align: var(--heading-align);
+    /* Mobile font size by default */
+    font-size: var(--heading-size-mobile); 
+    width: 100%;
+    display: block;
+  }
 
-<div class="carousel-container">
-  {% for block in section.blocks %}
-    <div class="review-card">
-      <div class="card-image">
-         {%- if block.settings.image != blank -%}
-        {{ block.settings.author_image | image_url: width: 261, height: 188 | image_tag: 
-      loading: 'lazy', 
-      alt: block.settings.author_name,
-      class: 'review-card-img'
-    }}
-    {%- endif -%}
-      </div>
-      <div class="card-content">
-        <div class="stars">
-          {% assign rating = block.settings.star_rating %}
-              {% for i in (1..5) %}
-                {% if i <= rating %}
-                  ★
-                {% else %}
-                  ☆
-                {% endif %}
-              {% endfor %}
-        </div>
-        <h3 class="user-name">{{ block.settings.author_name }} <span class="verified">✔</span></h3>
-        <p class="review-text">{{ block.settings.testimonial_text }}</p>
-      </div>
+  /* Responsive switch to Desktop size */
+  @media screen and (min-width: 750px) {
+    .testimonial-title {
+      font-size: var(--heading-size-desktop);
+    }
+  }
+
+  .verified-badge {
+    color: #28a745;
+    font-size: 0.85em;
+    margin-left: 4px;
+  }
+{%- endstyle -%}
+
+<div class="testimonial-section-wrapper">
+  
+  {%- if section.settings.section_title != blank -%}
+    <div class="testimonial-header container">
+      <{{ section.settings.heading_tag }} class="testimonial-title">
+        {{ section.settings.section_title | escape }}
+      </{{ section.settings.heading_tag }}>
     </div>
-  {% endfor %}
+  {%- endif -%}
 
+  <div class="carousel-container">
+    {% for block in section.blocks %}
+      <div class="review-card" {{ block.shopify_attributes }}>
+        <div class="card-image">
+          {%- if block.settings.author_image != blank -%}
+            {{ block.settings.author_image | image_url: width: 500 | image_tag: 
+              loading: 'lazy', 
+              alt: block.settings.author_name,
+              class: 'review-card-img'
+            }}
+          {%- endif -%}
+        </div>
+
+        <div class="card-content">
+          <div class="bean-rating-wrapper">
+            {% assign rating = block.settings.star_rating %}
+            {% for i in (1..5) %}
+              <span class="bean-icon">
+                {% if i <= rating %}
+                  {{ 'coffee-full-bean.svg' | inline_asset_content }}
+                {% else %}
+                  {{ 'coffee-unfilled-bean.svg' | inline_asset_content }}
+                {% endif %}
+              </span>
+            {% endfor %}
+          </div>
+
+          <h3 class="user-name">
+            {{ block.settings.author_name }} 
+            {% if block.settings.show_verified %}
+              <span class="verified-badge">✔</span>
+            {% endif %}
+          </h3>
+          <p class="review-text">{{ block.settings.testimonial_text }}</p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
-
+</div>
 
 {% schema %}
 {
   "name": "Testimonial Section",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
   "settings": [
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
     {
       "type": "text",
       "id": "section_title",
-      "label": "Heading",
-      "default": "Reviews"
+      "label": "Heading Text",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "SEO Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
     }
   ],
   "blocks": [
@@ -79,46 +190,23 @@
           "default": "John Doe"
         },
         {
-          "type": "text",
+          "type": "checkbox",
+          "id": "show_verified",
+          "label": "Show Verified Check",
+          "default": true
+        },
+        {
+          "type": "textarea",
           "id": "testimonial_text",
           "label": "Testimonial Text",
-          "default": "This is a great product! Highly recommended."
+          "default": "Best coffee I've ever had!"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Custom Testimonials",
-      "settings": {
-        "section_title": "What Our Customers Say"
-      },
-      "blocks": [
-        {
-          "type": "testimonial",
-          "settings": {
-            "author_name": "Kyle W.",
-            "testimonial_text": "Shout out from Florida. Love my James Coffee Night Owl. Perfect way to start my day.",
-            "star_rating": 5
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "author_name": "Kelsey K.",
-            "testimonial_text": "Favorite coffee! Thanks for offering shipping on this as I don't live in San Diego.",
-            "star_rating": 5
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "author_name": "Stephan S.",
-            "testimonial_text": "I was looking for a coffee shop on the day we were heading home and stumbled on this place.",
-            "star_rating": 4
-          }
-        }
-      ]
+      "name": "Custom Testimonials"
     }
   ]
 }

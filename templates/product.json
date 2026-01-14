@@ -157,9 +157,7 @@
             "coffee_strength_FrbtUh": {
               "type": "coffee_strength",
               "name": "Coffee Strength Test",
-              "settings": {
-                "product": "coffee-carrier-wave"
-              },
+              "settings": {},
               "blocks": {}
             },
             "variant_picker_R3rGDr": {

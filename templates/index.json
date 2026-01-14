@@ -311,6 +311,20 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
+                    "swatches_hPW76B": {
+                      "type": "swatches",
+                      "name": "t:names.swatches",
+                      "settings": {
+                        "product_swatches_alignment": "flex-start",
+                        "product_swatches_alignment_mobile": "flex-start",
+                        "hide_padding": false,
+                        "product_swatches_padding_top": 4,
+                        "product_swatches_padding_bottom": 0,
+                        "product_swatches_padding_left": 0,
+                        "product_swatches_padding_right": 0
+                      },
+                      "blocks": {}
+                    },
                     "product_title_gtg38q": {
                       "type": "product-title",
                       "name": "t:names.product_title",
@@ -361,6 +375,7 @@
                     }
                   },
                   "block_order": [
+                    "swatches_hPW76B",
                     "product_title_gtg38q",
                     "price_Vz3EzL"
                   ]

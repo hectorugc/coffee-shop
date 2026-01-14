@@ -1,0 +1,155 @@
+.carousel-container {
+
+padding: 60px 0;
+
+max-width: 100%;
+
+overflow: hidden;
+
+background-color: #ffffff; /* Change if you want a different section background */
+
+}
+
+
+
+.section-heading {
+
+text-align: center;
+
+margin-bottom: 40px;
+
+font-size: 2rem;
+
+color: #333;
+
+}
+
+
+
+/* The main target for Flickity */
+
+.main-carousel {
+
+width: 100%;
+
+display: block;
+
+opacity: 0; /* Hidden until Flickity is ready */
+
+transition: opacity 0.3s ease-in;
+
+}
+
+
+
+/* Show carousel once initialized */
+
+.main-carousel.flickity-enabled {
+
+opacity: 1;
+
+}
+
+
+
+/* --- 2. THE REVIEW CARD (261px Width) --- */
+
+.review-card {
+
+width: 261px;
+
+margin-right: 25px; /* Space between slides */
+
+background: #ffffff;
+
+border-radius: 12px;
+
+box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+border: 1px solid #f0f0f0;
+
+height: auto;
+
+/* Reset Flickity default math conflicts */
+
+left: 0 !important;
+
+}
+
+
+
+/* --- 3. IMAGE RENDERING (261x188) --- */
+
+.card-image {
+
+width: 261px;
+
+height: 188px;
+
+overflow: hidden;
+
+border-radius: 12px 12px 0 0;
+
+background-color: #f4f4f4;
+
+position: relative;
+
+}
+
+
+
+.review-card-img {
+
+width: 100%;
+
+height: 100%;
+
+object-fit: cover; /* Mimics background-size: cover */
+
+display: block;
+
+}
+
+
+
+/* --- 4. CONTENT & DYNAMIC STARS --- */
+
+.card-content {
+
+padding: 35px 20px 20px;
+
+text-align: center;
+
+position: relative;
+
+}
+
+
+
+/* Floating Star Box */
+
+.stars {
+
+position: absolute;
+
+top: -22px; /* Pulls stars up onto the image */
+
+left: 50%;
+
+transform: translateX(-50%);
+
+background: #ffffff;
+
+padding: 8px 18px;
+
+border-radius: 6px;
+
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+white-space: nowrap;
+
+color:#f07d00;
+
+font-size: 1.1rem;
+
+}

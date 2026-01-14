@@ -4,13 +4,13 @@
 <script src="{{ 'custom-testimonials-slider.js' | asset_url }}" type="module" defer="defer"></script>
 
 {%- style -%}
-  /* Scoping styles to this specific section instance */
   #shopify-section-{{ section.id }} {
     --heading-size-desktop: {{ section.settings.heading_font_size }}px;
     --heading-size-mobile: {{ section.settings.heading_font_size | times: 0.75 | round }}px;
     --heading-align: {{ section.settings.heading_alignment }};
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --star-color: {{ section.settings.star_color }};
   }
 
   .testimonial-section-wrapper {
@@ -23,17 +23,23 @@
     margin: 0 0 30px 0;
     line-height: 1.2;
     text-align: var(--heading-align);
-    /* Mobile font size by default */
     font-size: var(--heading-size-mobile); 
     width: 100%;
     display: block;
   }
 
-  /* Responsive switch to Desktop size */
   @media screen and (min-width: 750px) {
     .testimonial-title {
       font-size: var(--heading-size-desktop);
     }
+  }
+
+  /* Star Styling */
+  .stars-wrapper {
+    color: var(--star-color);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
   }
 
   .verified-badge {
@@ -67,16 +73,10 @@
         </div>
 
         <div class="card-content">
-          <div class="bean-rating-wrapper">
+          <div class="stars-wrapper">
             {% assign rating = block.settings.star_rating %}
             {% for i in (1..5) %}
-              <span class="bean-icon">
-                {% if i <= rating %}
-                  {{ 'coffee-full-bean.svg' | inline_asset_content }}
-                {% else %}
-                  {{ 'coffee-unfilled-bean.svg' | inline_asset_content }}
-                {% endif %}
-              </span>
+              {% if i <= rating %}★{% else %}☆{% endif %}
             {% endfor %}
           </div>
 
@@ -138,6 +138,12 @@
         { "value": "right", "label": "Right" }
       ],
       "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star Color",
+      "default": "#ffcc00"
     },
     {
       "type": "header",

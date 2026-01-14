@@ -1,0 +1,125 @@
+
+{{- 'custom-testimonial.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}>
+<script src="{{ 'custom-testimonials-slider.js' | asset_url }}" type="module" defer="defer"></script>
+
+
+
+
+<div class="carousel-container">
+  {% for block in section.blocks %}
+    <div class="review-card">
+      <div class="card-image">
+         {%- if block.settings.image != blank -%}
+        {{ block.settings.author_image | image_url: width: 261, height: 188 | image_tag: 
+      loading: 'lazy', 
+      alt: block.settings.author_name,
+      class: 'review-card-img'
+    }}
+    {%- endif -%}
+      </div>
+      <div class="card-content">
+        <div class="stars">
+          {% assign rating = block.settings.star_rating %}
+              {% for i in (1..5) %}
+                {% if i <= rating %}
+                  ★
+                {% else %}
+                  ☆
+                {% endif %}
+              {% endfor %}
+        </div>
+        <h3 class="user-name">{{ block.settings.author_name }} <span class="verified">✔</span></h3>
+        <p class="review-text">{{ block.settings.testimonial_text }}</p>
+      </div>
+    </div>
+  {% endfor %}
+
+  </div>
+
+
+{% schema %}
+{
+  "name": "Testimonial Section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+        {
+          "type": "range",
+          "id": "star_rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_text",
+          "label": "Testimonial Text",
+          "default": "This is a great product! Highly recommended."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Testimonials",
+      "settings": {
+        "section_title": "What Our Customers Say"
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "author_name": "Kyle W.",
+            "testimonial_text": "Shout out from Florida. Love my James Coffee Night Owl. Perfect way to start my day.",
+            "star_rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "author_name": "Kelsey K.",
+            "testimonial_text": "Favorite coffee! Thanks for offering shipping on this as I don't live in San Diego.",
+            "star_rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "author_name": "Stephan S.",
+            "testimonial_text": "I was looking for a coffee shop on the day we were heading home and stumbled on this place.",
+            "star_rating": 4
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

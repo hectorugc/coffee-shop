@@ -19,7 +19,7 @@ carrousels.forEach((container) => {
 		wrapAround: true,
 		pageDots: false,
         pauseAutoPlayOnHover: false,
-    	cellAlign: 'left',
+    	cellAlign: 'center',
         adaptiveHeight: false,
 		accessibility: true,
 		

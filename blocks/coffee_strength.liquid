@@ -1,0 +1,35 @@
+ {% assign coffee_strength = closest.product.metafields.custom.coffee_strength.value %}
+
+
+
+{% if coffee_strength != blank %}
+
+    <div class="flex">
+        {% for i in (1..5) %}
+            {% if i <= coffee_strength %}
+                {{ 'coffee-full-bean.svg' | inline_asset_content}}
+            {% else %}
+                 {{ 'coffee-unfilled-bean.svg' | inline_asset_content}}
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Coffee Strength Test",
+    "settings": [
+      {
+        "type": "product",
+        "id": "id_product",
+        "label": "Test"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Coffee Strength Test"
+      }
+    ]
+  }
+{% endschema %}

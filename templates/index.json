@@ -839,6 +839,64 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "custom_testimonial_Dc8dCJ": {
+      "type": "custom-testimonial",
+      "blocks": {
+        "testimonial_hwxrfw": {
+          "type": "testimonial",
+          "settings": {
+            "author_image": "shopify://shop_images/wrzfpaAVU.webp",
+            "star_rating": 3,
+            "author_name": "John Doe",
+            "testimonial_text": "This is a great product! Highly recommended."
+          }
+        },
+        "testimonial_PWnr3Y": {
+          "type": "testimonial",
+          "settings": {
+            "author_image": "shopify://shop_images/74lyTDRyC.webp",
+            "star_rating": 5,
+            "author_name": "John Doe",
+            "testimonial_text": "This is a great product! Highly recommended."
+          }
+        },
+        "testimonial_qqNd6E": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "author_name": "Kyle W.",
+            "testimonial_text": "Shout out from Florida. Love my James Coffee Night Owl. Perfect way to start my day."
+          }
+        },
+        "testimonial_DjzQk3": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "author_name": "Kelsey K.",
+            "testimonial_text": "Favorite coffee! Thanks for offering shipping on this as I don't live in San Diego."
+          }
+        },
+        "testimonial_q7djR8": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 4,
+            "author_name": "Stephan S.",
+            "testimonial_text": "I was looking for a coffee shop on the day we were heading home and stumbled on this place."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_hwxrfw",
+        "testimonial_PWnr3Y",
+        "testimonial_qqNd6E",
+        "testimonial_DjzQk3",
+        "testimonial_q7djR8"
+      ],
+      "name": "Custom Testimonials",
+      "settings": {
+        "section_title": "What Our Customers Say"
+      }
     }
   },
   "order": [
@@ -846,6 +904,7 @@
     "product_list_X8Q7bi",
     "section_RhpYRt",
     "media_with_content_H7CkPJ",
-    "collection_list_CCUka8"
+    "collection_list_CCUka8",
+    "custom_testimonial_Dc8dCJ"
   ]
 }

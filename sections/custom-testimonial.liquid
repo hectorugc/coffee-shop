@@ -1,6 +1,12 @@
 {{- 'custom-testimonial.css' | asset_url | stylesheet_tag -}}
 {{- 'flickity.css' | asset_url | stylesheet_tag -}}
-{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+
+
+<script
+  src="{{ 'flickity.pkgd.min.js' | asset_url }}"
+  type="text/javascript" defer="defer"
+></script>
+
 <script src="{{ 'custom-testimonials-slider.js' | asset_url }}" type="module" defer="defer"></script>
 
 {%- style -%}
@@ -16,7 +22,7 @@
   .testimonial-section-wrapper {
     padding-top: var(--section-padding-top);
     padding-bottom: var(--section-padding-bottom);
-    overflow: hidden;
+    
   }
 
   .testimonial-title {

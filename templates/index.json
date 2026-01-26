@@ -665,6 +665,16 @@
     "custom_testimonial_fHRrXC": {
       "type": "custom-testimonial",
       "blocks": {
+        "testimonial_haeemB": {
+          "type": "testimonial",
+          "settings": {
+            "author_image": "shopify://shop_images/QPiSew_li.webp",
+            "star_rating": 3,
+            "author_name": "Joel Numb",
+            "show_verified": true,
+            "testimonial_text": "Best coffee I've ever had!"
+          }
+        },
         "testimonial_H37faV": {
           "type": "testimonial",
           "settings": {
@@ -717,6 +727,7 @@
         }
       },
       "block_order": [
+        "testimonial_haeemB",
         "testimonial_H37faV",
         "testimonial_9nqqw8",
         "testimonial_n6XecJ",

@@ -157,7 +157,9 @@
             "coffee_strength_FrbtUh": {
               "type": "coffee_strength",
               "name": "Coffee Strength Test",
-              "settings": {},
+              "settings": {
+                "id_product": "{{ closest.product }}"
+              },
               "blocks": {}
             },
             "variant_picker_R3rGDr": {
